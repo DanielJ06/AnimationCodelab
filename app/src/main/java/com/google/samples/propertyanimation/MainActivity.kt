@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun disableViewIfRuning(view: View, animator: ObjectAnimator) {
-        animator.addListener(object: AnimatorListenerAdapter() {
+    private fun ObjectAnimator.disableViewIfRuning(view: View) {
+        addListener(object: AnimatorListenerAdapter() {
 
             override fun onAnimationStart(animation: Animator?) {
                 view.isEnabled = false
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     private fun rotater() {
         val animator = ObjectAnimator.ofFloat(star, View.ROTATION, -360f, 0f)
         animator.duration = 1000
-        disableViewIfRuning(rotateButton, animator)
+        animator.disableViewIfRuning(rotateButton)
         animator.start()
     }
 
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         animator.duration = 1500
         animator.repeatCount = 1
         animator.repeatMode = ObjectAnimator.REVERSE
-        disableViewIfRuning(translateButton, animator)
+        animator.disableViewIfRuning(translateButton)
         animator.start()
     }
 
